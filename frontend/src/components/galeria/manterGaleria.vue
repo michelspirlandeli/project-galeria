@@ -26,7 +26,7 @@
                   <td>{{item.id_galeria_video}}</td>
                   <td>{{item.titulo}}</td>
                   <td><video v-bind:src="item.caminho" width="320" heigth="240" controls></video></td>
-                  <td><button type="button" class="btn btn-danger"
+                  <td><button type="button" class="btn btn-warning"
                     v-on:click="prepararFormEditar(item.id_galeria_video)">
                     <i class="fas fa-edit"></i> Editar
                   </button></td>
@@ -102,7 +102,7 @@ export default {
   },
   methods: {
     listarDados(){
-      this.$galeriaService.getTodos().then(response => {
+      this.$galeriaServices.getTodos().then(response => {
         if(response.erro){
           this.exibirMsgAlert("Ocorreu um erro.", "erro");
           console.log("deu erro");
@@ -164,7 +164,7 @@ export default {
       }
     },
     cadastrar(dadosFormData){
-      this.$galeriaService.adicionar(dadosFormData).then(response => {
+      this.$galeriaServices.adicionar(dadosFormData).then(response => {
           
           if(!this.verificarRetornoHttp(response)){
             this.limparForm();
@@ -196,7 +196,7 @@ export default {
     },
     prepararFormEditar(id){
       this.limparMsgAlert();
-      this.$galeriaService.getId(id).then(response => {
+      this.$galeriaServices.getId(id).then(response => {
         if(!this.verificarRetornoHttp(response)){
           this.registro.id_galeria_video = response.dados[0].id_galeria_video;
           this.registro.titulo = response.dados[0].titulo;
@@ -215,7 +215,7 @@ export default {
       this.exibirListagemForm = true;
     },
     editar(dadosFormData){
-      this.$galeriaService.editar(dadosFormData).then(response => {
+      this.$galeriaServices.editar(dadosFormData).then(response => {
         if(!this.verificarRetornoHttp(response)){
           this.limparForm();
           this.listarDados();
@@ -226,7 +226,7 @@ export default {
       })
     },
     deletar(id){
-      this.$galeriaService.deletar(id).then(response => {
+      this.$galeriaServices.deletar(id).then(response => {
         if(!this.verificarRetornoHttp(response)){
           this.listarDados();
         }
