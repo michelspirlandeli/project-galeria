@@ -7,6 +7,7 @@
 
 <script>
 import AppMenu from './components/appMenu'
+
 export default {
   name: 'app',
   components: {
